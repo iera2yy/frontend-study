@@ -1,12 +1,12 @@
-# frontend_study v3.3
 #  JavaScript
+
 ## 语法
 
 - 数据类型
 
   - 基本数据类型：string、boolean、number、null、undefined、symbol、bigint
   - 引用数据类型：object
-
+  
 - **this**，4种绑定规则分别是：默认绑定、隐式绑定、显示绑定、new 绑定。优先级从低到高。
 
   - 默认绑定，即没有其他绑定规则存在时的默认规则。
@@ -79,21 +79,21 @@
     ```
 
 - **new**
-
+  
   - 创建一个新对象
   - 将构造函数的作用域赋值给新对象（也就是构造函数中的this指向新对象）
   - 执行构造函数中的代码（为这个新对象添加属性）
   - 返回新对象
-
+  
 - **call**、**apply**和**bind**
-
+  
   - `call()`和`apply()`
     - 这两个方法都是函数对象的方法，需要通过函数对象来调用
     - 对函数调用`call()`和`apply()`都会调用函数执行
     - 在调用`call()`和`apply(`)可以将一个对象指定为第一个参数，此时这个对象将会成为函数执行时的this
     - `call()`方法可以将实参在对象之后一次传入，`fun.call(obj, 2, 3)`
     - `apply()`方法需要将实参封装到一个数组中统一传递，`fun.apply(obj, [2, 3])`
-
+  
   ```javascript
   Function.prototype.call = function(context) {
       context.fn = this;
@@ -101,12 +101,12 @@
       delete context.fn;
   }
   ```
-
+  
   - bind()
     - bind方法和call类似，第一个参数是this的指向，后面传入一个参数列表(但是这个参数列表可以分多次传入，call则必须一次性传入所有参数)
     - 改变this的指向不会立即执行，而是返回一个永久改变this指向的函数，返回原函数的拷贝
     - call和apply临时改变一次this指向并立即执行
-
+  
   ```javascript
   Function.prototype.bind = function(context) {
       var _this = this;
@@ -117,43 +117,42 @@
       }
   }
   ```
-
+  
 - **let**和**var**
-
+  
   - let定义块级作用域变量，var定义函数级作用域变量
   - 配合for循环独特应用`setTimeout`
   - 全局声明时，var会成为`window`对象的属性，let则不会
   - let没有变量提升与暂时性死区
   - let变量不能重复声明
-
+  
 - 变量提升：**函数提升优先级比变量提升要高，且不会被变量声明覆盖，但是会被变量赋值覆盖。**
 
 - **instanceof**和**typeof**
-
+  
   - typeof用来判断数据类型，返回值为8个字符串，分别为
     - 正常情况：undefined、boolean、string、number、symbol、bigint
     - 特殊情况：function、object(包括null)
-
+  
 - instanceof用来判断对象实例，返回值为布尔型
-
-  - `A instanceof B`查看对象B的prototype指向的对象是否在对象A的`[[prototype]](__proto__)`链上，当对象B的prototype为null时将报错(类似于空指针异常)
+    - `A instanceof B`查看对象B的prototype指向的对象是否在对象A的`[[prototype]](__proto__)`链上，当对象B的prototype为null时将报错(类似于空指针异常)
 
 
   ```javascript
-function func() {}
-
-function instanceOf(f, func) {
-    let proto = f.__proto__;
-    while (proto !== null) {
-        if (proto === func.prototype) {
-            return true;
-        }
-        proto = proto.__proto__;
-    }
-    return false;
-}
-
-console.log(instanceOf(new func(), func)); // true
+  function func() {}
+  
+  function instanceOf(f, func) {
+      let proto = f.__proto__;
+      while (proto !== null) {
+          if (proto === func.prototype) {
+              return true;
+          }
+          proto = proto.__proto__;
+      }
+      return false;
+  }
+  
+  console.log(instanceOf(new func(), func)); // true
   ```
 
   - reduce
@@ -191,7 +190,7 @@ console.log(arr, sum);
 ```
 
 - ==和===
-
+  
   - == equality 等同，=== identity 恒等。
   - ==， 两边值类型不同的时候，要先进行类型转换，再比较。 
   - ==，不做类型转换，类型不同的一定不等。 
@@ -208,7 +207,7 @@ console.log(arr, sum);
       - 如果一个是字符串，一个是数值，把字符串转换成数值再进行比较。 
       - 如果任一值是 true，把它转换成 1 再比较；如果任一值是 false，把它转换成 0 再比较。 
       - 任何其他组合，都[不相等]。
-
+  
 - undefined和void 0
 
   > The void operator evaluates the given expression and then returns undefined. 
@@ -522,7 +521,7 @@ promise().then().where().then().then();
 - 寄生组合式继承
 
   - 优点：这种方式的高效率体现它只调用了一次 Parent 构造函数，并且因此避免了在 Parent.prototype 上面创建不必要的、多余的属性。与此同时，原型链还能保持不变；因此，还能够正常使用 instanceof 和 isPrototypeOf。开发人员普遍认为寄生组合式继承是引用类型最理想的继承范式。
-
+  
   ```javascript
   function Parent(name) {
       this.name = name;
@@ -553,7 +552,6 @@ promise().then().where().then().then();
   ```
 
 - class
-
   - 类的所有属性定义在内部，类的所有方法都定义在类的`prototype`属性上。构造函数的prototype属性在ES6的“类”上继续存在。因此，事实上类的所有方法都定义在类的prototype属性上。
 
     ```javascript
@@ -571,9 +569,9 @@ promise().then().where().then().then();
     point.hasOwnProperty('toString')	// false
     point.__proto__.hasOwnProperty('toString')	// true
     ```
-
+  
   - `Object.assign`方法可以一次向类添加多个方法。
-
+  
     ```javascript
     class Point {
         constructor() {}
@@ -583,15 +581,15 @@ promise().then().where().then().then();
         toValue(){},
     });
     ```
-
+  
   - `prototype`对象的`constructor`属性直接指向“类”本身。
-
+  
     ```javascript
     Point.prototype.constructor === Point // true
     ```
-
+  
   - ES6内部定义的所有方法都是不可枚举的。
-
+  
     ```javascript
     // ES6
     class Point {
@@ -607,14 +605,14 @@ promise().then().where().then().then();
     Object.keys(Point.prototype)	// [ 'toString' ]
     Object.getOwnPropertyNames(Point.prototype)		// [ 'constructor', 'toString' ]
     ```
-
+  
   - class作为构造函数的语法糖，同时有`prototype`和`__proto__`属性，因此同时存在两条继承链。作为一个对象，子类的原型(`__proto__`属性)是父类；作为一个构造函数，子类的原型(`prototype`属性)是父类的实例。
 
     - 子类的`__proto__`属性表示构造函数的集成，总是指向父类。
     - 子类的`prototype`属性的`__proto__`属性表示方法的继承，总是指向父类的`prototype`属性。
-
+  
   - 父类只要是一个`prototype`属性的函数，就能被子类继承。以下是三种特殊情况：
-
+  
     ```javascript
     // 子类继承Object类
     class A extends Object {}
@@ -631,9 +629,9 @@ promise().then().where().then().then();
     A.__proto__ === Function.prototype	// true
     A.prototype.__proto__ === undefined	// true
     ```
-
+  
   - 子类实例的`__proto__`属性的`__proto__`属性指向父类实例的`__proto__`属性。也就是说，子类的原型的原型就是父类的原型。
-
+  
     ```javascript
     class A {}
     class B extends A {}
@@ -1131,8 +1129,8 @@ const curryIt = function() {
 
   - open(method, url, async) 方法需要三个参数:
     -  method：发送请求所使用的方法（GET或POST）；与POST相比，GET更简单也更快，并且在大部分情况下都能用；然而，在以下情况中，请使用POST请求：无法使用缓存文件（更新服务器上的文件或数据库）；向服务器发送大量数据（POST 没有数据量限制）；发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠
-    -  url：规定服务器端脚本的 URL(该文件可以是任何类型的文件，比如 .txt 和 .xml，或者服务器脚本文件，比如 .asp 和 .php （在传回响应之前，能够在服务器上执行任务）)；
-    -  async：规定应当对请求进行异步（true）或同步（false）处理；true是在等待服务器响应时执行其他脚本，当响应就绪后对响应进行处理；false是等待服务器响应再执行。
+    - url：规定服务器端脚本的 URL(该文件可以是任何类型的文件，比如 .txt 和 .xml，或者服务器脚本文件，比如 .asp 和 .php （在传回响应之前，能够在服务器上执行任务）)；
+    - async：规定应当对请求进行异步（true）或同步（false）处理；true是在等待服务器响应时执行其他脚本，当响应就绪后对响应进行处理；false是等待服务器响应再执行。
   - send() 方法可将请求送往服务器。
   - onreadystatechange：存有处理服务器响应的函数，每当 readyState 改变时，onreadystatechange 函数就会被执行。
   - readyState：存有服务器响应的状态信息。
@@ -1552,7 +1550,7 @@ var ajax = {
     // axios
     axios.defaults.withCredentials = true
     ```
-
+    
   - **Proxy代理(脚手架)**
 
     - 方法一
@@ -2121,13 +2119,12 @@ AO = {
 ## 前端性能优化
 
 - 网页图片加载优化方案
-
   - 启动页面时加载过多图片，解决方法：图片按需加载
-
+  
   - 部分图片体积过大，解决方法：减少单位像素所需的字节数(.webp)；减少一张图片总的像素
-
+  
   - 图片加载完成实现方案
-
+  
     ```java
     // 判断图片是否加载完成
     // Chrome环境
@@ -2144,9 +2141,7 @@ AO = {
       if(img1.readyState === "complete" || img1.readyState == "loaded"){}
     }
     ```
-
 - 缓存
-
   - 本地数据存 cookie；localStorage/sessionStorage；indexedDB
   - 内存缓存
   - Cache API
@@ -2155,29 +2150,20 @@ AO = {
     - 协商缓存(服务器端) Last-Modified/If-Modified-Since(最后一次修改时间)；ETag/If-None-Match(校验码：文件编号，文件大小，最后一次修改时间)
       - 在没有调整服务器时间和篡改客户端缓存的情况下，Last-Modified/If-Modified-Since配合起来管理协商缓存是非常可靠的；有时候服务器上资源有变化，但最后修改时间却没有变化。
   - Push Cache
-
 - 发送请求
-
   - 不必要的重定向 301；302
   - DNS预解析
   - 预先建立连接
   - 使用CDN
-
 - 服务器响应
-
   - 使用流
   - 业务接口内部耦合
   - 避免内部问题
-
 - 页面解析与处理
-
   - 资源位置顺序  
   - 合理使用defer/async脚本
-
 - 页面静态资源
-
 - 运行时
-
 - 预加载
 
 ![A1BA234AAD4D93064DC5A5F04D31DDDC](https://gitee.com/iera2yy/typora_pic/raw/master/A1BA234AAD4D93064DC5A5F04D31DDDC.png)
@@ -2201,20 +2187,15 @@ AO = {
 - mustache
 
   - 模板引擎是将数据要变为视图最优雅的解决方案。
-
   - 数据变为视图的方法
-
     - 纯DOM法
     - 数组join法
     - ES6反引号法`` `${a}` ``
     - 模板引擎
-
+    
     <img src="https://gitee.com/iera2yy/typora_pic/raw/master/DBEFBA39FE578962E88E3558D42BF670.png" alt="mustache原理图" style="zoom:40%;" />
-
   - tokens是一个JS的嵌套数组，是抽象语法树、虚拟节点等等的开山鼻祖
-
   - mustache底层重点
-
     1. 将模板字符串编译为tokens形式
     2. 将tokens结合数据，解析为dom字符串
 
@@ -2225,7 +2206,7 @@ AO = {
   - parse阶段：使用大量的正则表达式对template字符串进行解析，将标签、指令、属性等转化为抽象语法树AST。
   - optimize阶段：遍历AST，找到其中的一些静态节点并进行标记，方便在页面重渲染的时候进行diff比较时，直接跳过这一些静态节点，优化runtime的性能。
   - generate阶段：将最终的AST转化为render函数字符串。
-
+  
 - Vue渲染过程
 
 <img src="https://gitee.com/iera2yy/typora_pic/raw/master/F7EEA68A878E148E665B50A3AA412669.png" alt="F7EEA68A878E148E665B50A3AA412669" style="zoom:50%;" />
@@ -2284,18 +2265,18 @@ console.log("code", code);
 ```
 
 - 作用/优势
-
+  
   - **跨平台优势**，由于 Virtual DOM 是以 JavaScript 对象为基础而不依赖真实平台环境，所以使它具有了跨平台的能力，比如说浏览器平台、Weex、Node 等。
   - **操作DOM慢，JS运行效率高**，我们可以将DOM对比操作放在JS层，提高效率。
   - **提升渲染能力**，Virtual DOM的优势不在于单次的操作，而是在大量、频繁的数据更新下，能够对视图进行合理、高效的更新。例子：若一次操作中有10次更新DOM的动作，虚拟DOM不会立即操作DOM，而是将这10次更新的diff内容保存到本地一个JS对象中，最终将这个JS对象一次性attch到DOM树上，再进行后续操作，避免大量无谓的计算量。
-
+  
 - diff算法
-
+  
   - key是节点的唯一标识符，告诉diff算法，在更改前后它们是否是同一个DOM节点。
   - 只有是同一个虚拟节点，才进行精细化比较，否则就是暴力拆除并重建。如何定义是统一个虚拟节点？答：**选择器**相同且**key**相同。例如，父节点改变，则整个子节点都重建。
   - 只进行同层级比较，不会进行跨层级比较。例如，增加一层，则增加层内所有子节点全部重建。
   - 在diff中，只对同层级的子节点进行比较，放弃跨级的节点比较，使得时间复杂从`O(n^3)`降低值`O(n)`，也就是说，只有当新旧children都为多个子节点时才需要用核心的Diff算法进行同层级比较。
-
+  
 - diff比较逻辑
 
   - 两个节点相同，但不在相同层级上，无法复用
@@ -2311,7 +2292,6 @@ console.log("code", code);
     <img src="https://gitee.com/iera2yy/typora_pic/raw/master/v2-f724ac345fe5a5fb232185dcabc7b770_1440w.jpg" alt="img" style="zoom:25%;" />
 
 - 命中查找，diff算法优化
-
   - 命中一种就不在进行命中判断；如果都没命中，则需要循环来寻找，移动到旧前的前面
     1. 新前与旧前
     2. 新后与旧后
@@ -2323,7 +2303,6 @@ console.log("code", code);
   - 当新前与旧后命中时，此时要移动节点。新前指向的节点移动到旧前的前面
 
 - 虚拟DOM中key的作用
-
   - 当状态中的数据发生变化时，react会根据新数据生成新的虚拟DOM，随后React进行新虚拟DOM与旧虚拟DOM的diff比较，比较规则如下：
     - 旧虚拟DOM中找到了与新虚拟DOM相同的key
       - 若虚拟DOM中内容没变，直接使用之前的真实DOM
@@ -2885,10 +2864,10 @@ console.log("code", code);
 > Renderer 层，根据不同的平台，渲染出相应的页面，比较常见的是 ReactDOM 和 ReactNative。
 >
 > const fiber = {
->  stateNode,    // 节点实例
->  child,             // 子节点
->  sibling,          // 兄弟节点
->  return,          // 父节点
+>     stateNode,    // 节点实例
+>     child,             // 子节点
+>     sibling,          // 兄弟节点
+>     return,          // 父节点
 > }
 
 - 优先级高的任务（如键盘输入）可以打断优先级低的任务（如Diff）的执行，从而更快的生效。任务的优先级有六种：
@@ -3001,16 +2980,13 @@ console.log("code", code);
 ### Redux
 
 - Redux是JavaScript状态容器，使每个State变化可预测，动作与状态统一管理。
-
   - 某个组件的状态，需要让其他组件随时拿到（共享）
   - 一个组件需要改变另一个组件的状态（通信）
-
 - 三大原则
-
   - **单一数据源**，整个应用的state被储存在一棵object tree中，并且这个object tree只存在于唯一一个store中。
   - **State是只读的**，唯一改变state的方法就是触发action，action是一个用于描述已发生事件的普通对象。
   - **使用纯函数来执行修改**，为了描述action如何改变state tree，需要编写reducers。
-
+  
   > **纯函数**
   >
   > 不得改写参数
@@ -3018,15 +2994,11 @@ console.log("code", code);
   > 不能调用系统 I/O 的API
   >
   > 不能调用Date.now()或者Math.random()等不纯的方法，因为每次会得到不一样的结果
-
 - 用户交互工作流程
-
   - 首先，用户（通过View）发出Action，发出方式就用到了dispatch方法。
   - 然后，Store自动调用Reducer，并且传入两个参数：当前State和收到的Action，Reducer会返回新的State。
   - State一旦有变化，Store就会调用监听函数，来更新View。
-
 - 三大核心概念
-
   - action
     - 动作的对象
     - 包含2个属性
@@ -3270,25 +3242,25 @@ this.context // 读取context中的value数据
 
 - 如何向组件内部动态传入带内容的结构(标签)?
 
-  Vue中: 
-  	使用slot技术, 也就是通过组件标签体传入结构  <A><B/></A>
-  React中:
-  	使用children props: 通过组件标签体传入结构
-  	使用render props: 通过组件标签属性传入结构,而且可以携带数据，一般用render函数属性
+	Vue中: 
+		使用slot技术, 也就是通过组件标签体传入结构  <A><B/></A>
+	React中:
+		使用children props: 通过组件标签体传入结构
+		使用render props: 通过组件标签属性传入结构,而且可以携带数据，一般用render函数属性
 
 - children props
 
-  <A>
-    <B>xxxx</B>
-  </A>
-  {this.props.children}
-  问题: 如果B组件需要A组件内的数据, ==> 做不到 
+	<A>
+	  <B>xxxx</B>
+	</A>
+	{this.props.children}
+	问题: 如果B组件需要A组件内的数据, ==> 做不到 
 
 - render props
 
-  <A render={(data) => <C data={data}></C>}></A>
-  A组件: {this.props.render(内部state数据)}
-  C组件: 读取A组件传入的数据显示 {this.props.data} 
+	<A render={(data) => <C data={data}></C>}></A>
+	A组件: {this.props.render(内部state数据)}
+	C组件: 读取A组件传入的数据显示 {this.props.data} 
 
 ### 错误处理
 
@@ -3432,7 +3404,6 @@ if (cluster.isMaster) {
     - 被:global 包裹起来的类名，不会被模块化
 
   
-
 ```jsx
   // in react
   // index.module.css
@@ -3446,7 +3417,7 @@ if (cluster.isMaster) {
 ```
 
   - CSS in JS
-
+  
     ```javascript
     const style = {
       width: 200,
